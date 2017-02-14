@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'core.apps.CoreConfig',
+    'chat',
+    'message',
+    'post',
+    'friendship',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +63,7 @@ MIDDLEWARE = [
 
 INTERNAL_IPS = '127.0.0.1',
 
-AUTH_USER_MODEL = 'core.User'
+# AUTH_USER_MODEL = 'core.User'
 
 ROOT_URLCONF = 'application.urls'
 
@@ -86,7 +91,7 @@ WSGI_APPLICATION = 'application.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': config.get('db', 'NAME'),
         'USER': config.get('db', 'USER'),
         'PASSWORD': config.get('db', 'PASSWORD'),
@@ -132,3 +137,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'collected_static')
+STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'src/static/'), )
+# STATIC_ROOT = '/Users/mannimarco/web/ModernArt/collected_static'
+# STATICFILES_DIRS = ('/Users/mannimarco/web/ModernArt/src/static/', )
+
+# Media files
+
+MEDIA_URL = '/media/'
+# MEDIA_ROOT = '/Users/mannimarco/web/ModernArt/media'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+
+# User model
+
+AUTH_USER_MODEL = 'core.User'
+
+LOGIN_URL = 'user:login'
+
+LOGIN_REDIRECT_URL = '/'
